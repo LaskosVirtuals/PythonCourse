@@ -34,6 +34,8 @@ html:
   use_repository_button: true
   use_edit_page_button: false
   home_page_in_navbar: true
+  extra_css:
+    - _static/custom.css
   extra_footer: |
     <p>
     A top-down Python course designed for AI coders
