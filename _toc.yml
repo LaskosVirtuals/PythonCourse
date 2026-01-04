@@ -1,0 +1,20 @@
+# Table of contents - MVP Version
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+
+parts:
+  - caption: Getting Started
+    chapters:
+      - file: intro/welcome
+      - file: intro/how-to-use
+
+  - caption: Module 2 - The Import System
+    chapters:
+      - file: 02-import-system/index
+        sections:
+          - file: 02-import-system/01-import-forms
+          - file: 02-import-system/02-stdlib-vs-thirdparty
+          - file: 02-import-system/03-packages-modules
+          - file: 02-import-system/04-circular-imports

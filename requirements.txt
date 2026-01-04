@@ -1,0 +1,11 @@
+# Python for AI Coders - Jupyter Book Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core - Jupyter Book for building the course
+jupyter-book>=1.0.0
+
+# For interactive code in browser (Thebe/Pyodide support)
+sphinx-thebe>=0.3.0
+
+# Optional: For GitHub Pages deployment
+ghp-import>=2.1.0

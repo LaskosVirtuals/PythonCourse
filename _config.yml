@@ -1,0 +1,49 @@
+# Book settings
+title: Python for AI Coders
+author: AI Coder Community
+logo: ""
+copyright: "2025"
+
+# Force re-execution of notebooks on each build
+execute:
+  execute_notebooks: auto
+
+# Exclude patterns - don't scan these folders
+exclude_patterns:
+  - venv/**
+  - _build/**
+  - "**.ipynb_checkpoints"
+  - nul
+  - jep.py
+
+# Disable launch buttons for now (can enable later when you have a GitHub repo)
+launch_buttons:
+  thebe: false
+  notebook: false
+  binderhub_url: ""
+
+# Repository settings - leave empty for now
+repository:
+  url: ""
+  path_to_book: ""
+  branch: main
+
+# HTML settings
+html:
+  use_issues_button: false
+  use_repository_button: false
+  use_edit_page_button: false
+  home_page_in_navbar: true
+  extra_footer: |
+    <p>
+    A top-down Python course designed for AI coders
+    </p>
+
+# Parse settings
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - deflist
+    - dollarmath
+    - linkify
+    - substitution
