@@ -16,22 +16,22 @@ exclude_patterns:
   - nul
   - jep.py
 
-# Disable launch buttons for now (can enable later when you have a GitHub repo)
+# Launch buttons for interactive code
 launch_buttons:
-  thebe: false
-  notebook: false
-  binderhub_url: ""
+  thebe: true
+  notebook: true
+  binderhub_url: "https://mybinder.org"
 
-# Repository settings - leave empty for now
+# Repository settings
 repository:
-  url: ""
+  url: https://github.com/LaskosVirtuals/PythonCourse
   path_to_book: ""
   branch: main
 
 # HTML settings
 html:
-  use_issues_button: false
-  use_repository_button: false
+  use_issues_button: true
+  use_repository_button: true
   use_edit_page_button: false
   home_page_in_navbar: true
   extra_footer: |
@@ -47,3 +47,10 @@ parse:
     - dollarmath
     - linkify
     - substitution
+
+# Sphinx configuration for Thebe
+sphinx:
+  config:
+    thebe_config:
+      repository_url: https://github.com/LaskosVirtuals/PythonCourse
+      repository_branch: main
