@@ -6,8 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Python for AI Coders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CLAUDE.md &#8212; Python for AI Coders</title>
   
   
   
@@ -57,8 +58,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'CLAUDE';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -258,7 +259,7 @@
       
       
       
-      <li><a href="https://github.com/LaskosVirtuals/PythonCourse/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/LaskosVirtuals/PythonCourse/issues/new?title=Issue%20on%20page%20%2FCLAUDE.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -270,6 +271,54 @@
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/CLAUDE.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -311,7 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -322,11 +373,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>CLAUDE.md</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-overview">Project Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-commands">Build Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-guidelines">Content Guidelines</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -336,13 +398,79 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="claude-md">
+<h1><a class="reference external" href="http://CLAUDE.md">CLAUDE.md</a><a class="headerlink" href="#claude-md" title="Link to this heading">#</a></h1>
+<p>This file provides guidance to Claude Code (<a class="reference external" href="http://claude.ai/code">claude.ai/code</a>) when working with code in this repository.</p>
+<section id="project-overview">
+<h2>Project Overview<a class="headerlink" href="#project-overview" title="Link to this heading">#</a></h2>
+<p>This is a <strong>Jupyter Book</strong> project - an interactive Python educational course called “Python for AI Coders.” The course teaches Python from a “top-down” perspective specifically designed for people who code with AI assistants (Claude, Copilot, ChatGPT).</p>
+<p>The pedagogical approach is unique: it teaches architecture and imports before basic syntax, helping AI users understand real code they encounter rather than learning Python from scratch.</p>
+</section>
+<section id="build-commands">
+<h2>Build Commands<a class="headerlink" href="#build-commands" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+<span class="c1"># Build the Jupyter Book (outputs to _build/html/)</span>
+jupyter-book<span class="w"> </span>build<span class="w"> </span>.
+</pre></div>
 </div>
+</section>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<p><strong>Content Organization:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index.md</span></code> - Course homepage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intro/</span></code> - Getting started content (welcome, how-to-use)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">02-import-system/</span></code> - Module 2 content (pattern: <code class="docutils literal notranslate"><span class="pre">NN-module-name/</span></code>)</p></li>
+<li><p>Each module has an <code class="docutils literal notranslate"><span class="pre">index.md</span></code> overview and numbered <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> lesson files</p></li>
+</ul>
+<p><strong>Configuration:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> - Jupyter Book settings (title, theme, Thebe interactive execution)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> - Table of contents defining course structure</p></li>
+</ul>
+<p><strong>Build Output:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_build/html/</span></code> - Generated static site with interactive code cells</p></li>
+</ul>
+<p><strong>Interactive Features:</strong></p>
+<ul class="simple">
+<li><p>Uses Thebe + Pyodide for browser-based Python execution (no server required)</p></li>
+<li><p>Notebooks execute on build and are also runnable live in the browser</p></li>
+</ul>
+</section>
+<section id="content-guidelines">
+<h2>Content Guidelines<a class="headerlink" href="#content-guidelines" title="Link to this heading">#</a></h2>
+<p>Lessons follow a consistent format:</p>
+<ol class="arabic simple">
+<li><p>Concept explanation in markdown</p></li>
+<li><p>Code examples in executable cells</p></li>
+<li><p>“Try It Yourself” experiments</p></li>
+</ol>
+<p>When adding new modules, follow the naming pattern <code class="docutils literal notranslate"><span class="pre">NN-module-name/</span></code> and update <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> to include the new content.</p>
+</section>
+</section>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "LaskosVirtuals/PythonCourse",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -360,6 +488,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-overview">Project Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-commands">Build Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-guidelines">Content Guidelines</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

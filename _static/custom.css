@@ -1,0 +1,169 @@
+/* Custom styles for Python for AI Coders */
+
+/* ============================================
+   DARK MODE CODE BLOCK IMPROVEMENTS
+   ============================================ */
+
+/* Code blocks in dark mode */
+html[data-theme="dark"] .highlight {
+    background-color: #1e1e2e !important;
+    border: 1px solid #45475a !important;
+    border-radius: 8px !important;
+}
+
+html[data-theme="dark"] .highlight pre {
+    background-color: #1e1e2e !important;
+    color: #cdd6f4 !important;
+}
+
+/* Inline code in dark mode */
+html[data-theme="dark"] code {
+    background-color: #313244 !important;
+    color: #f5c2e7 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+}
+
+/* Code syntax highlighting - dark mode (Catppuccin-inspired) */
+html[data-theme="dark"] .highlight .k,
+html[data-theme="dark"] .highlight .kn,
+html[data-theme="dark"] .highlight .kd {
+    color: #cba6f7 !important;  /* Keywords - purple */
+}
+
+html[data-theme="dark"] .highlight .n,
+html[data-theme="dark"] .highlight .nn {
+    color: #cdd6f4 !important;  /* Names - light text */
+}
+
+html[data-theme="dark"] .highlight .s,
+html[data-theme="dark"] .highlight .s1,
+html[data-theme="dark"] .highlight .s2,
+html[data-theme="dark"] .highlight .sd {
+    color: #a6e3a1 !important;  /* Strings - green */
+}
+
+html[data-theme="dark"] .highlight .c,
+html[data-theme="dark"] .highlight .c1,
+html[data-theme="dark"] .highlight .cm {
+    color: #6c7086 !important;  /* Comments - gray */
+    font-style: italic;
+}
+
+html[data-theme="dark"] .highlight .nb,
+html[data-theme="dark"] .highlight .bp {
+    color: #89dceb !important;  /* Builtins - cyan */
+}
+
+html[data-theme="dark"] .highlight .nf,
+html[data-theme="dark"] .highlight .fm {
+    color: #89b4fa !important;  /* Functions - blue */
+}
+
+html[data-theme="dark"] .highlight .mi,
+html[data-theme="dark"] .highlight .mf,
+html[data-theme="dark"] .highlight .mo {
+    color: #fab387 !important;  /* Numbers - orange */
+}
+
+html[data-theme="dark"] .highlight .o,
+html[data-theme="dark"] .highlight .ow {
+    color: #94e2d5 !important;  /* Operators - teal */
+}
+
+html[data-theme="dark"] .highlight .p {
+    color: #cdd6f4 !important;  /* Punctuation - light */
+}
+
+html[data-theme="dark"] .highlight .nc {
+    color: #f9e2af !important;  /* Class names - yellow */
+}
+
+html[data-theme="dark"] .highlight .ne {
+    color: #f38ba8 !important;  /* Exceptions - red */
+}
+
+html[data-theme="dark"] .highlight .si {
+    color: #fab387 !important;  /* String interpolation - orange */
+}
+
+html[data-theme="dark"] .highlight .sa {
+    color: #cba6f7 !important;  /* String prefix - purple */
+}
+
+/* Output cells in dark mode */
+html[data-theme="dark"] .cell_output {
+    background-color: #181825 !important;
+    border-left: 3px solid #89b4fa !important;
+    padding: 10px !important;
+    margin: 5px 0 !important;
+    border-radius: 0 8px 8px 0 !important;
+}
+
+html[data-theme="dark"] .cell_output pre {
+    color: #a6adc8 !important;
+    background-color: transparent !important;
+}
+
+/* ============================================
+   LIGHT MODE CODE BLOCK IMPROVEMENTS
+   ============================================ */
+
+html[data-theme="light"] .highlight {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e1e4e8 !important;
+    border-radius: 8px !important;
+}
+
+html[data-theme="light"] .highlight pre {
+    background-color: #f8f9fa !important;
+}
+
+html[data-theme="light"] code {
+    background-color: #eff1f3 !important;
+    color: #d63384 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+}
+
+/* Output cells in light mode */
+html[data-theme="light"] .cell_output {
+    background-color: #f1f3f4 !important;
+    border-left: 3px solid #0066cc !important;
+    padding: 10px !important;
+    margin: 5px 0 !important;
+    border-radius: 0 8px 8px 0 !important;
+}
+
+/* ============================================
+   GENERAL IMPROVEMENTS
+   ============================================ */
+
+/* Better code font */
+code, pre, .highlight {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', Consolas, monospace !important;
+    font-size: 0.9em !important;
+}
+
+/* Code block line numbers */
+.highlight .linenos {
+    color: #6c7086 !important;
+    padding-right: 10px !important;
+    border-right: 1px solid #45475a !important;
+    margin-right: 10px !important;
+}
+
+/* Notebook cell styling */
+.cell {
+    margin-bottom: 1em !important;
+}
+
+/* Copy button styling */
+button.copybtn {
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+button.copybtn:hover {
+    opacity: 1;
+}
