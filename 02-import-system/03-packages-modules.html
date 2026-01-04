@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Packages and Modules &#8212; Python for AI Coders</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02-import-system/03-packages-modules';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Circular Imports and How to Fix Them" href="04-circular-imports.html" />
+    <link rel="prev" title="Standard Library vs. Third-Party Packages" href="02-stdlib-vs-thirdparty.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python for AI Coders</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Python for AI Coders
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro/welcome.html">Welcome: A New Way to Learn Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/how-to-use.html">How to Use This Course</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 - The Import System</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Module 2: The Import System</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-import-forms.html">Import Statement Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-stdlib-vs-thirdparty.html">Standard Library vs. Third-Party Packages</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Packages and Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-circular-imports.html">Circular Imports and How to Fix Them</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/LaskosVirtuals/PythonCourse/main?urlpath=tree/02-import-system/03-packages-modules.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/LaskosVirtuals/PythonCourse" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/LaskosVirtuals/PythonCourse/issues/new?title=Issue%20on%20page%20%2F02-import-system/03-packages-modules.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02-import-system/03-packages-modules.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Packages and Modules</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-vs-packages">Modules vs. Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-import-paths-map-to-files">How Import Paths Map to Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-init-py-file">The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> File</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-does">What It Does</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-init-py-patterns">Common <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-vs-absolute-imports">Relative vs. Absolute Imports</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-imports">Absolute Imports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-imports">Relative Imports</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-package-layouts">Common Package Layouts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-1-flat-simple-scripts">Layout 1: Flat (Simple Scripts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-2-package-in-root">Layout 2: Package in Root</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-3-src-layout-modern-best-practice">Layout 3: <code class="docutils literal notranslate"><span class="pre">src</span></code> Layout (Modern Best Practice)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-python-finds-modules">How Python Finds Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-coder-gotchas">AI Coder Gotchas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gotcha-1-running-scripts-vs-modules">Gotcha 1: Running Scripts vs. Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gotcha-2-name-collision">Gotcha 2: Name Collision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gotcha-3-missing-init-py">Gotcha 3: Missing <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-check-trace-the-import">Quick Check: Trace the Import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-up">Next Up</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="packages-and-modules">
+<h1>Packages and Modules<a class="headerlink" href="#packages-and-modules" title="Link to this heading">#</a></h1>
+<p>When AI generates code, you’ll see imports like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">myproject.utils.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_data</span>
+</pre></div>
+</div>
+<p>What do all these dots mean? How does Python find these files? What’s <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>?</p>
+<p>This lesson demystifies Python’s package structure.</p>
+<section id="modules-vs-packages">
+<h2>Modules vs. Packages<a class="headerlink" href="#modules-vs-packages" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>What It Is</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Module</strong></p></td>
+<td><p>A single <code class="docutils literal notranslate"><span class="pre">.py</span></code> file</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">utils.py</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Package</strong></p></td>
+<td><p>A folder containing modules</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">myproject/</span></code> folder</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Key insight:</strong> When you see dots in imports, you’re navigating folders.</p>
+</section>
+<section id="how-import-paths-map-to-files">
+<h2>How Import Paths Map to Files<a class="headerlink" href="#how-import-paths-map-to-files" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This import:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">myproject.utils.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_data</span>
+
+<span class="c1"># Maps to this file structure:</span>
+<span class="n">myproject</span><span class="o">/</span>
+    <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">utils</span><span class="o">/</span>
+        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+        <span class="n">helpers</span><span class="o">.</span><span class="n">py</span>      <span class="o">&lt;--</span> <span class="n">This</span> <span class="n">file</span><span class="err">!</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">():</span>  <span class="o">&lt;--</span> <span class="n">This</span> <span class="n">function</span><span class="err">!</span>
+</pre></div>
+</div>
+<p>Each dot (<code class="docutils literal notranslate"><span class="pre">.</span></code>) represents going into a subfolder.</p>
+</section>
+<section id="the-init-py-file">
+<h2>The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> File<a class="headerlink" href="#the-init-py-file" title="Link to this heading">#</a></h2>
+<p>This special file makes a folder into a Python package.</p>
+<section id="what-it-does">
+<h3>What It Does<a class="headerlink" href="#what-it-does" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Tells Python “this folder is a package”</strong></p></li>
+<li><p><strong>Runs when you import the package</strong></p></li>
+<li><p><strong>Controls what gets exported</strong></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s simulate a package structure</span>
+<span class="c1"># In a real project, these would be files</span>
+
+<span class="c1"># Imagine this file structure:</span>
+<span class="c1"># mypackage/</span>
+<span class="c1">#     __init__.py</span>
+<span class="c1">#     core.py</span>
+<span class="c1">#     helpers.py</span>
+
+<span class="c1"># If __init__.py is EMPTY:</span>
+<span class="c1">#   - from mypackage import core     # Works</span>
+<span class="c1">#   - from mypackage import helpers  # Works  </span>
+<span class="c1">#   - from mypackage import MyClass  # Fails! (unless core.py is imported and re-exported)</span>
+
+<span class="c1"># If __init__.py contains:</span>
+<span class="c1">#   from .core import MyClass</span>
+<span class="c1">#   from .helpers import process_data</span>
+<span class="c1">#</span>
+<span class="c1"># Then:</span>
+<span class="c1">#   - from mypackage import MyClass     # Works!</span>
+<span class="c1">#   - from mypackage import process_data # Works!</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;See the examples below for how this works in practice.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>See the examples below for how this works in practice.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="common-init-py-patterns">
+<h3>Common <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> Patterns<a class="headerlink" href="#common-init-py-patterns" title="Link to this heading">#</a></h3>
+<p><strong>Pattern 1: Empty file</strong> (minimal)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="c1"># (empty - just marks folder as package)</span>
+</pre></div>
+</div>
+<p><strong>Pattern 2: Re-export for convenience</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">MainClass</span><span class="p">,</span> <span class="n">helper_function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Product</span>
+
+<span class="c1"># Now users can do:</span>
+<span class="c1"># from mypackage import MainClass</span>
+<span class="c1"># Instead of:</span>
+<span class="c1"># from mypackage.core import MainClass</span>
+</pre></div>
+</div>
+<p><strong>Pattern 3: Define public API with <code class="docutils literal notranslate"><span class="pre">__all__</span></code></strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">MainClass</span><span class="p">,</span> <span class="n">_internal_helper</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MainClass&quot;</span><span class="p">]</span>  <span class="c1"># Only MainClass is &quot;public&quot;</span>
+
+<span class="c1"># from mypackage import * </span>
+<span class="c1"># ^ This only imports MainClass, not _internal_helper</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="relative-vs-absolute-imports">
+<h2>Relative vs. Absolute Imports<a class="headerlink" href="#relative-vs-absolute-imports" title="Link to this heading">#</a></h2>
+<p>When importing within a package, you have two options:</p>
+<section id="absolute-imports">
+<h3>Absolute Imports<a class="headerlink" href="#absolute-imports" title="Link to this heading">#</a></h3>
+<p>Start from the root package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In mypackage/utils/formatter.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackage.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">MainClass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackage.utils.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">process</span>
+</pre></div>
+</div>
+<p><strong>Pros:</strong> Clear where things come from<br />
+<strong>Cons:</strong> Breaks if you rename the package</p>
+</section>
+<section id="relative-imports">
+<h3>Relative Imports<a class="headerlink" href="#relative-imports" title="Link to this heading">#</a></h3>
+<p>Use dots to navigate relative to current file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In mypackage/utils/formatter.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">helpers</span>          <span class="c1"># Same folder (utils/)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">process</span>   <span class="c1"># Same folder, specific item</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">core</span>            <span class="c1"># Parent folder (mypackage/)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..core</span><span class="w"> </span><span class="kn">import</span> <span class="n">MainClass</span>   <span class="c1"># Parent folder, specific item</span>
+</pre></div>
+</div>
+<p><strong>The dots mean:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.</span></code> = current package/folder</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span></code> = parent package/folder</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">...</span></code> = grandparent (rare)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visual example of relative imports:</span>
+
+<span class="n">structure</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">mypackage/</span>
+<span class="s2">    __init__.py</span>
+<span class="s2">    core.py              </span>
+<span class="s2">    utils/</span>
+<span class="s2">        __init__.py</span>
+<span class="s2">        helpers.py      &lt;-- If we&#39;re HERE</span>
+<span class="s2">        formatter.py</span>
+<span class="s2">    models/</span>
+<span class="s2">        __init__.py</span>
+<span class="s2">        user.py</span>
+
+<span class="s2">From helpers.py:</span>
+<span class="s2">    from . import formatter     →  utils/formatter.py</span>
+<span class="s2">    from .. import core         →  mypackage/core.py</span>
+<span class="s2">    from ..models import user   →  mypackage/models/user.py</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mypackage/
+    __init__.py
+    core.py              
+    utils/
+        __init__.py
+        helpers.py      &lt;-- If we&#39;re HERE
+        formatter.py
+    models/
+        __init__.py
+        user.py
+
+From helpers.py:
+    from . import formatter     →  utils/formatter.py
+    from .. import core         →  mypackage/core.py
+    from ..models import user   →  mypackage/models/user.py
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="common-package-layouts">
+<h2>Common Package Layouts<a class="headerlink" href="#common-package-layouts" title="Link to this heading">#</a></h2>
+<p>AI generates different project structures. Here are the most common:</p>
+<section id="layout-1-flat-simple-scripts">
+<h3>Layout 1: Flat (Simple Scripts)<a class="headerlink" href="#layout-1-flat-simple-scripts" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myproject</span><span class="o">/</span>
+    <span class="n">main</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Import like: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">utils</span> <span class="pre">import</span> <span class="pre">helper_function</span></code></p>
+</section>
+<section id="layout-2-package-in-root">
+<h3>Layout 2: Package in Root<a class="headerlink" href="#layout-2-package-in-root" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myproject</span><span class="o">/</span>
+    <span class="n">mypackage</span><span class="o">/</span>
+        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">py</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">tests</span><span class="o">/</span>
+        <span class="n">test_core</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">setup</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Import like: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">mypackage.core</span> <span class="pre">import</span> <span class="pre">MainClass</span></code></p>
+</section>
+<section id="layout-3-src-layout-modern-best-practice">
+<h3>Layout 3: <code class="docutils literal notranslate"><span class="pre">src</span></code> Layout (Modern Best Practice)<a class="headerlink" href="#layout-3-src-layout-modern-best-practice" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myproject</span><span class="o">/</span>
+    <span class="n">src</span><span class="o">/</span>
+        <span class="n">mypackage</span><span class="o">/</span>
+            <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">py</span>
+            <span class="n">utils</span><span class="o">/</span>
+                <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+                <span class="n">helpers</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">tests</span><span class="o">/</span>
+        <span class="n">test_core</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">pyproject</span><span class="o">.</span><span class="n">toml</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">src/</span></code> folder prevents accidentally importing the wrong thing during development.</p>
+</section>
+</section>
+<section id="how-python-finds-modules">
+<h2>How Python Finds Modules<a class="headerlink" href="#how-python-finds-modules" title="Link to this heading">#</a></h2>
+<p>When you write <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">something</span></code>, Python searches in order:</p>
+<ol class="arabic simple">
+<li><p><strong>Built-in modules</strong> (like <code class="docutils literal notranslate"><span class="pre">sys</span></code>, <code class="docutils literal notranslate"><span class="pre">os</span></code>)</p></li>
+<li><p><strong>Current directory</strong> (where you ran Python)</p></li>
+<li><p><strong>PYTHONPATH</strong> (environment variable)</p></li>
+<li><p><strong>Installed packages</strong> (<code class="docutils literal notranslate"><span class="pre">site-packages</span></code>)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See Python&#39;s search path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python searches for modules in these locations:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="mi">5</span><span class="p">]):</span>  <span class="c1"># First 5 paths</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ... and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span><span class="o">-</span><span class="mi">5</span><span class="si">}</span><span class="s2"> more locations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python searches for modules in these locations:
+  1. C:\Users\ahoko\miniconda3\python312.zip
+  2. C:\Users\ahoko\miniconda3\DLLs
+  3. C:\Users\ahoko\miniconda3\Lib
+  4. C:\Users\ahoko\miniconda3
+  5. E:\003_PyCharm_codeProjects\PythonCourse\venv
+  ... and 2 more locations
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ai-coder-gotchas">
+<h2>AI Coder Gotchas<a class="headerlink" href="#ai-coder-gotchas" title="Link to this heading">#</a></h2>
+<section id="gotcha-1-running-scripts-vs-modules">
+<h3>Gotcha 1: Running Scripts vs. Modules<a class="headerlink" href="#gotcha-1-running-scripts-vs-modules" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># These behave differently!</span>
+python<span class="w"> </span>mypackage/main.py<span class="w">        </span><span class="c1"># Runs as script (relative imports may fail)</span>
+python<span class="w"> </span>-m<span class="w"> </span>mypackage.main<span class="w">        </span><span class="c1"># Runs as module (relative imports work)</span>
+</pre></div>
+</div>
+<p>If AI-generated code has relative imports that fail, try running with <code class="docutils literal notranslate"><span class="pre">-m</span></code>.</p>
+</section>
+<section id="gotcha-2-name-collision">
+<h3>Gotcha 2: Name Collision<a class="headerlink" href="#gotcha-2-name-collision" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you have a file named random.py in your project:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>  <span class="c1"># This imports YOUR random.py, not Python&#39;s!</span>
+
+<span class="c1"># Fix: rename your file to something else</span>
+</pre></div>
+</div>
+<p><strong>Never name your files after standard library modules!</strong></p>
+</section>
+<section id="gotcha-3-missing-init-py">
+<h3>Gotcha 3: Missing <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code><a class="headerlink" href="#gotcha-3-missing-init-py" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mypackage</span><span class="o">/</span>
+    <span class="n">utils</span><span class="o">/</span>          <span class="o">&lt;--</span> <span class="n">No</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+        <span class="n">helpers</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># This fails:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackage.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">helpers</span>
+<span class="c1"># ModuleNotFoundError: No module named &#39;mypackage.utils&#39;</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> Python 3.3+ has “namespace packages” that work without <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>, but most code still uses them for compatibility.</p>
+</section>
+</section>
+<section id="quick-check-trace-the-import">
+<h2>Quick Check: Trace the Import<a class="headerlink" href="#quick-check-trace-the-import" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Given this structure:</span>
+<span class="n">structure</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">webapp/</span>
+<span class="s2">    __init__.py</span>
+<span class="s2">    app.py</span>
+<span class="s2">    api/</span>
+<span class="s2">        __init__.py</span>
+<span class="s2">        routes.py</span>
+<span class="s2">        handlers/</span>
+<span class="s2">            __init__.py</span>
+<span class="s2">            auth.py</span>
+<span class="s2">            users.py</span>
+<span class="s2">    models/</span>
+<span class="s2">        __init__.py</span>
+<span class="s2">        user.py</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+
+<span class="c1"># What file does each import refer to?</span>
+<span class="c1"># 1. from webapp import app</span>
+<span class="c1">#    Answer: webapp/app.py</span>
+
+<span class="c1"># 2. from webapp.api import routes  </span>
+<span class="c1">#    Answer: webapp/api/routes.py</span>
+
+<span class="c1"># 3. from webapp.api.handlers.auth import login</span>
+<span class="c1">#    Answer: webapp/api/handlers/auth.py, function &#39;login&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>webapp/
+    __init__.py
+    app.py
+    api/
+        __init__.py
+        routes.py
+        handlers/
+            __init__.py
+            auth.py
+            users.py
+    models/
+        __init__.py
+        user.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># In webapp/api/handlers/auth.py, what do these relative imports mean?</span>
+
+<span class="c1"># from . import users</span>
+<span class="c1"># → webapp/api/handlers/users.py</span>
+
+<span class="c1"># from .. import routes</span>
+<span class="c1"># → webapp/api/routes.py</span>
+
+<span class="c1"># from ...models import user</span>
+<span class="c1"># → webapp/models/user.py</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Understanding complete! You can now trace any import path.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Understanding complete! You can now trace any import path.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Module</p></td>
+<td><p>Single <code class="docutils literal notranslate"><span class="pre">.py</span></code> file</p></td>
+</tr>
+<tr class="row-odd"><td><p>Package</p></td>
+<td><p>Folder with <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Dots in imports</p></td>
+<td><p>Navigate into folders</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></p></td>
+<td><p>Makes folder a package, controls exports</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code> in relative import</p></td>
+<td><p>Current folder</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">..</span></code> in relative import</p></td>
+<td><p>Parent folder</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__all__</span></code></p></td>
+<td><p>List of public exports</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="next-up">
+<h2>Next Up<a class="headerlink" href="#next-up" title="Link to this heading">#</a></h2>
+<p>What happens when modules import each other in a circle? Why does it fail, and how do you fix it?</p>
+<p>Continue to: <a class="reference internal" href="04-circular-imports.html"><span class="std std-doc">Circular Imports</span></a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "LaskosVirtuals/PythonCourse",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./02-import-system"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-stdlib-vs-thirdparty.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Standard Library vs. Third-Party Packages</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04-circular-imports.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Circular Imports and How to Fix Them</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-vs-packages">Modules vs. Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-import-paths-map-to-files">How Import Paths Map to Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-init-py-file">The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> File</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-does">What It Does</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-init-py-patterns">Common <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-vs-absolute-imports">Relative vs. Absolute Imports</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-imports">Absolute Imports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-imports">Relative Imports</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-package-layouts">Common Package Layouts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-1-flat-simple-scripts">Layout 1: Flat (Simple Scripts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-2-package-in-root">Layout 2: Package in Root</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-3-src-layout-modern-best-practice">Layout 3: <code class="docutils literal notranslate"><span class="pre">src</span></code> Layout (Modern Best Practice)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-python-finds-modules">How Python Finds Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-coder-gotchas">AI Coder Gotchas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gotcha-1-running-scripts-vs-modules">Gotcha 1: Running Scripts vs. Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gotcha-2-name-collision">Gotcha 2: Name Collision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gotcha-3-missing-init-py">Gotcha 3: Missing <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-check-trace-the-import">Quick Check: Trace the Import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-up">Next Up</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AI Coder Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+A top-down Python course designed for AI coders
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

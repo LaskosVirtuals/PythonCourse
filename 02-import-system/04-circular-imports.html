@@ -1,0 +1,1061 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Circular Imports and How to Fix Them &#8212; Python for AI Coders</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02-import-system/04-circular-imports';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Packages and Modules" href="03-packages-modules.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python for AI Coders</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Python for AI Coders
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro/welcome.html">Welcome: A New Way to Learn Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/how-to-use.html">How to Use This Course</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 - The Import System</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Module 2: The Import System</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-import-forms.html">Import Statement Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-stdlib-vs-thirdparty.html">Standard Library vs. Third-Party Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-packages-modules.html">Packages and Modules</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Circular Imports and How to Fix Them</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/LaskosVirtuals/PythonCourse/main?urlpath=tree/02-import-system/04-circular-imports.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/LaskosVirtuals/PythonCourse" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/LaskosVirtuals/PythonCourse/issues/new?title=Issue%20on%20page%20%2F02-import-system/04-circular-imports.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02-import-system/04-circular-imports.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Circular Imports and How to Fix Them</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-circular-import">What Is a Circular Import?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-import-time-execution">Understanding Import-Time Execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-circular-imports-happen">Why Circular Imports Happen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-1-move-import-inside-function">Solution 1: Move Import Inside Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-2-use-type-checking-for-type-hints">Solution 2: Use <code class="docutils literal notranslate"><span class="pre">TYPE_CHECKING</span></code> for Type Hints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-3-use-string-annotations-forward-references">Solution 3: Use String Annotations (Forward References)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-4-restructure-your-code">Solution 4: Restructure Your Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-error-messages">Common Error Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-circular-imports">Debugging Circular Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-code-pattern-defensive-imports">AI Code Pattern: Defensive Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-complete">Module Complete!</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="circular-imports-and-how-to-fix-them">
+<h1>Circular Imports and How to Fix Them<a class="headerlink" href="#circular-imports-and-how-to-fix-them" title="Link to this heading">#</a></h1>
+<p>One of the most confusing errors you’ll encounter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ImportError</span><span class="p">:</span> <span class="n">cannot</span> <span class="kn">import</span><span class="w"> </span><span class="nn">name</span> <span class="s1">&#39;SomeClass&#39;</span> <span class="kn">from</span><span class="w"> </span><span class="s1">&#39;module&#39;</span>
+</pre></div>
+</div>
+<p>The code looks correct. The class exists. Why doesn’t it work?</p>
+<p>Often, the answer is <strong>circular imports</strong>.</p>
+<section id="what-is-a-circular-import">
+<h2>What Is a Circular Import?<a class="headerlink" href="#what-is-a-circular-import" title="Link to this heading">#</a></h2>
+<p>When two modules try to import each other:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># module_a.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">module_b</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassB</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassA</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ClassB</span><span class="p">()</span>
+
+<span class="c1"># module_b.py  </span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">module_a</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassA</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassB</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ClassA</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>The problem:</strong></p>
+<ol class="arabic simple">
+<li><p>Python starts loading <code class="docutils literal notranslate"><span class="pre">module_a</span></code></p></li>
+<li><p>It sees <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module_b</span> <span class="pre">import</span> <span class="pre">ClassB</span></code></p></li>
+<li><p>Python starts loading <code class="docutils literal notranslate"><span class="pre">module_b</span></code></p></li>
+<li><p>It sees <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module_a</span> <span class="pre">import</span> <span class="pre">ClassA</span></code></p></li>
+<li><p>But <code class="docutils literal notranslate"><span class="pre">module_a</span></code> isn’t finished loading! <code class="docutils literal notranslate"><span class="pre">ClassA</span></code> doesn’t exist yet!</p></li>
+<li><p><strong>ImportError</strong></p></li>
+</ol>
+</section>
+<section id="understanding-import-time-execution">
+<h2>Understanding Import-Time Execution<a class="headerlink" href="#understanding-import-time-execution" title="Link to this heading">#</a></h2>
+<p><strong>Key insight:</strong> Python runs code when you import it.</p>
+<p>This is different from many other languages!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># When Python imports a module, ALL top-level code runs:</span>
+
+<span class="c1"># Imagine this file: example_module.py</span>
+<span class="n">example_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">print(&quot;1. Module is being imported!&quot;)  # This runs at import time!</span>
+
+<span class="s1">MY_CONSTANT = &quot;hello&quot;  # This runs at import time!</span>
+<span class="s1">print(f&quot;2. Set constant to: </span><span class="si">{MY_CONSTANT}</span><span class="s1">&quot;)</span>
+
+<span class="s1">class MyClass:  # Class definition runs at import time!</span>
+<span class="s1">    print(&quot;3. Class body is executing!&quot;)</span>
+<span class="s1">    </span>
+<span class="s1">    def method(self):  # But method body only runs when called</span>
+<span class="s1">        print(&quot;4. Method called&quot;)</span>
+
+<span class="s1">print(&quot;5. Module finished loading&quot;)</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;What runs when you import this module?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example_code</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>What runs when you import this module?
+
+print(&quot;1. Module is being imported!&quot;)  # This runs at import time!
+
+MY_CONSTANT = &quot;hello&quot;  # This runs at import time!
+print(f&quot;2. Set constant to: {MY_CONSTANT}&quot;)
+
+class MyClass:  # Class definition runs at import time!
+    print(&quot;3. Class body is executing!&quot;)
+
+    def method(self):  # But method body only runs when called
+        print(&quot;4. Method called&quot;)
+
+print(&quot;5. Module finished loading&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s see import-time execution in action</span>
+<span class="c1"># We&#39;ll create a temporary module and import it</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">types</span>
+
+<span class="c1"># Create a module that prints when imported</span>
+<span class="n">demo_module</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">(</span><span class="s1">&#39;demo_import&#39;</span><span class="p">)</span>
+<span class="n">demo_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">print(&quot;&gt;&gt;&gt; Module code is running at import time!&quot;)</span>
+<span class="s1">x = 42</span>
+<span class="s1">print(f&quot;&gt;&gt;&gt; x has been set to </span><span class="si">{x}</span><span class="s1">&quot;)</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">demo_code</span><span class="p">,</span> <span class="n">demo_module</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The code above ran just from being loaded!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We can now access demo_module.x = </span><span class="si">{</span><span class="n">demo_module</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Module code is running at import time!
+&gt;&gt;&gt; x has been set to 42
+
+The code above ran just from being loaded!
+We can now access demo_module.x = 42
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-circular-imports-happen">
+<h2>Why Circular Imports Happen<a class="headerlink" href="#why-circular-imports-happen" title="Link to this heading">#</a></h2>
+<p>Circular imports often appear when:</p>
+<ol class="arabic simple">
+<li><p><strong>Related classes reference each other</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># user.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">order</span><span class="w"> </span><span class="kn">import</span> <span class="n">Order</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">:</span>
+    <span class="n">orders</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Order</span><span class="p">]</span>
+
+<span class="c1"># order.py  </span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">user</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="p">:</span>
+    <span class="n">customer</span><span class="p">:</span> <span class="n">User</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Type hints reference other modules</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same problem, even just for type hints!</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">other_module</span><span class="w"> </span><span class="kn">import</span> <span class="n">SomeClass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">SomeClass</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Utilities import models and vice versa</strong></p></li>
+</ol>
+</section>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h2>
+<section id="solution-1-move-import-inside-function">
+<h3>Solution 1: Move Import Inside Function<a class="headerlink" href="#solution-1-move-import-inside-function" title="Link to this heading">#</a></h3>
+<p>Import when you need it, not at module load time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instead of:</span>
+<span class="c1"># from module_b import ClassB  # At top level</span>
+<span class="c1"># </span>
+<span class="c1"># class ClassA:</span>
+<span class="c1">#     def use_b(self):</span>
+<span class="c1">#         return ClassB()</span>
+
+<span class="c1"># Do this:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassA</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>  <span class="c1"># Import inside function</span>
+        <span class="k">return</span> <span class="n">Counter</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">])</span>
+
+<span class="c1"># The import only happens when use_b() is called,</span>
+<span class="c1"># by which time all modules are fully loaded</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">ClassA</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">use_b</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;a&#39;: 2, &#39;b&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solution-2-use-type-checking-for-type-hints">
+<h3>Solution 2: Use <code class="docutils literal notranslate"><span class="pre">TYPE_CHECKING</span></code> for Type Hints<a class="headerlink" href="#solution-2-use-type-checking-for-type-hints" title="Link to this heading">#</a></h3>
+<p>If you only need the import for type hints:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="c1"># This block only runs when type checkers (like mypy) analyze the code</span>
+<span class="c1"># It does NOT run at runtime!</span>
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>  <span class="c1"># Only for type hints</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">:</span>
+    <span class="c1"># Use string annotation (&quot;OrderedDict&quot;) instead of actual type</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s2">&quot;OrderedDict&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing data: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># This works because:</span>
+<span class="c1"># 1. The import doesn&#39;t happen at runtime</span>
+<span class="c1"># 2. The type hint is a string, not evaluated at runtime</span>
+<span class="c1"># 3. Type checkers see the import and understand the type</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">process</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing data: {&#39;a&#39;: 1, &#39;b&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solution-3-use-string-annotations-forward-references">
+<h3>Solution 3: Use String Annotations (Forward References)<a class="headerlink" href="#solution-3-use-string-annotations-forward-references" title="Link to this heading">#</a></h3>
+<p>Put the type in quotes to delay evaluation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Without quotes - Python evaluates immediately</span>
+<span class="c1"># class User:</span>
+<span class="c1">#     friend: User  # Error! User isn&#39;t fully defined yet!</span>
+
+<span class="c1"># With quotes - Python treats it as a string (forward reference)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">friend</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>  <span class="c1"># Works! Evaluated later</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">friend</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">alice</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+<span class="n">bob</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+<span class="n">alice</span><span class="o">.</span><span class="n">friend</span> <span class="o">=</span> <span class="n">bob</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alice</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;s friend is </span><span class="si">{</span><span class="n">alice</span><span class="o">.</span><span class="n">friend</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice&#39;s friend is Bob
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solution-4-restructure-your-code">
+<h3>Solution 4: Restructure Your Code<a class="headerlink" href="#solution-4-restructure-your-code" title="Link to this heading">#</a></h3>
+<p>Often the best solution is to reorganize:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before: circular dependency</span>
+<span class="c1"># user.py imports order.py</span>
+<span class="c1"># order.py imports user.py</span>
+
+<span class="c1"># After: shared module</span>
+<span class="c1"># base.py - shared base classes, no imports from user/order</span>
+<span class="c1"># user.py imports base.py</span>
+<span class="c1"># order.py imports base.py</span>
+</pre></div>
+</div>
+<p>Or move the problematic code to a third module.</p>
+</section>
+</section>
+<section id="common-error-messages">
+<h2>Common Error Messages<a class="headerlink" href="#common-error-messages" title="Link to this heading">#</a></h2>
+<p>Learn to recognize circular import errors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Error 1: &quot;cannot import name &#39;X&#39; from &#39;module&#39;&quot;</span>
+<span class="c1"># This often indicates circular import - X exists but isn&#39;t loaded yet</span>
+
+<span class="n">error_1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">ImportError: cannot import name &#39;UserModel&#39; from &#39;models.user&#39;</span>
+
+<span class="s2">This usually means:</span>
+<span class="s2">- models.user exists</span>
+<span class="s2">- UserModel is defined in it</span>
+<span class="s2">- BUT there&#39;s a circular import preventing it from loading</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">error_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ImportError: cannot import name &#39;UserModel&#39; from &#39;models.user&#39;
+
+This usually means:
+- models.user exists
+- UserModel is defined in it
+- BUT there&#39;s a circular import preventing it from loading
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Error 2: &quot;partially initialized module &#39;X&#39; has no attribute &#39;Y&#39;&quot;</span>
+<span class="c1"># Explicit circular import error in Python 3.x</span>
+
+<span class="n">error_2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">AttributeError: partially initialized module &#39;mymodule&#39; has no attribute &#39;MyClass&#39; </span>
+<span class="s2">(most likely due to a circular import)</span>
+
+<span class="s2">This is Python telling you directly: circular import!</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">error_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AttributeError: partially initialized module &#39;mymodule&#39; has no attribute &#39;MyClass&#39; 
+(most likely due to a circular import)
+
+This is Python telling you directly: circular import!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="debugging-circular-imports">
+<h2>Debugging Circular Imports<a class="headerlink" href="#debugging-circular-imports" title="Link to this heading">#</a></h2>
+<p>Steps to find and fix circular imports:</p>
+<ol class="arabic simple">
+<li><p><strong>Find the cycle</strong></p>
+<ul class="simple">
+<li><p>Look at the error traceback</p></li>
+<li><p>Trace imports: A imports B imports C imports A</p></li>
+</ul>
+</li>
+<li><p><strong>Identify the dependency</strong></p>
+<ul class="simple">
+<li><p>Why does A need B?</p></li>
+<li><p>Is it for type hints? Runtime code? Both?</p></li>
+</ul>
+</li>
+<li><p><strong>Apply the right fix</strong></p>
+<ul class="simple">
+<li><p>Type hints only → <code class="docutils literal notranslate"><span class="pre">TYPE_CHECKING</span></code></p></li>
+<li><p>Runtime but not at import → move import inside function</p></li>
+<li><p>Fundamental design issue → restructure</p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Debugging tip: Add print statements to see import order</span>
+
+<span class="n">debug_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># At the top of each file, add:</span>
+<span class="s1">print(f&quot;Loading </span><span class="si">{__name__}</span><span class="s1">&quot;)</span>
+
+<span class="s1"># After each import, add:</span>
+<span class="s1">from other_module import Something</span>
+<span class="s1">print(f&quot;</span><span class="si">{__name__}</span><span class="s1">: imported Something from other_module&quot;)</span>
+
+<span class="s1"># At the end of the file, add:</span>
+<span class="s1">print(f&quot;</span><span class="si">{__name__}</span><span class="s1">: finished loading&quot;)</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Add these debug statements to trace your imports:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">debug_code</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Add these debug statements to trace your imports:
+
+# At the top of each file, add:
+print(f&quot;Loading {__name__}&quot;)
+
+# After each import, add:
+from other_module import Something
+print(f&quot;{__name__}: imported Something from other_module&quot;)
+
+# At the end of the file, add:
+print(f&quot;{__name__}: finished loading&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ai-code-pattern-defensive-imports">
+<h2>AI Code Pattern: Defensive Imports<a class="headerlink" href="#ai-code-pattern-defensive-imports" title="Link to this heading">#</a></h2>
+<p>AI often generates this pattern to avoid issues:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Common AI-generated pattern</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>  <span class="c1"># Makes ALL annotations strings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>  <span class="c1"># Only for type checking</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DataProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process data with optional Counter support.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Counter&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a Counter of items.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>  <span class="c1"># Import at runtime when needed</span>
+        <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+<span class="c1"># Test it</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">DataProcessor</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">count_items</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Counts: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: Counter({&#39;a&#39;: 3, &#39;b&#39;: 2, &#39;c&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Solution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Circular import for runtime use</p></td>
+<td><p>Move import inside function</p></td>
+</tr>
+<tr class="row-odd"><td><p>Circular import for type hints</p></td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">TYPE_CHECKING</span></code> block</p></td>
+</tr>
+<tr class="row-even"><td><p>Self-referencing type hints</p></td>
+<td><p>Use string annotation <code class="docutils literal notranslate"><span class="pre">&quot;ClassName&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Complex circular dependencies</p></td>
+<td><p>Restructure code, create base module</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="key-takeaways">
+<h3>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Python runs code at import time</p></li>
+<li><p>Circular imports fail because modules aren’t fully loaded</p></li>
+<li><p>The fix depends on <em>why</em> you need the import</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TYPE_CHECKING</span></code> is your friend for type hints</p></li>
+<li><p>When in doubt, restructure the code</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="module-complete">
+<h2>Module Complete!<a class="headerlink" href="#module-complete" title="Link to this heading">#</a></h2>
+<p>You now understand Python’s import system:</p>
+<ul class="simple">
+<li><p>All the different import forms</p></li>
+<li><p>Standard library vs. third-party packages</p></li>
+<li><p>How packages and modules are organized</p></li>
+<li><p>Why circular imports happen and how to fix them</p></li>
+</ul>
+<p>This knowledge will help you debug the most common errors in AI-generated code!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "LaskosVirtuals/PythonCourse",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./02-import-system"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-packages-modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Packages and Modules</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-circular-import">What Is a Circular Import?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-import-time-execution">Understanding Import-Time Execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-circular-imports-happen">Why Circular Imports Happen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-1-move-import-inside-function">Solution 1: Move Import Inside Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-2-use-type-checking-for-type-hints">Solution 2: Use <code class="docutils literal notranslate"><span class="pre">TYPE_CHECKING</span></code> for Type Hints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-3-use-string-annotations-forward-references">Solution 3: Use String Annotations (Forward References)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-4-restructure-your-code">Solution 4: Restructure Your Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-error-messages">Common Error Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-circular-imports">Debugging Circular Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-code-pattern-defensive-imports">AI Code Pattern: Defensive Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-complete">Module Complete!</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AI Coder Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+A top-down Python course designed for AI coders
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
