@@ -1,4 +1,4 @@
-# Table of contents - MVP Version
+# Table of contents - Full Course
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
@@ -10,6 +10,14 @@ parts:
       - file: intro/welcome
       - file: intro/how-to-use
 
+  - caption: Module 1 - Project Anatomy
+    chapters:
+      - file: 01-project-anatomy/index
+        sections:
+          - file: 01-project-anatomy/01-project-structure
+          - file: 01-project-anatomy/02-running-python
+          - file: 01-project-anatomy/03-pyproject-toml
+
   - caption: Module 2 - The Import System
     chapters:
       - file: 02-import-system/index
@@ -18,3 +26,57 @@ parts:
           - file: 02-import-system/02-stdlib-vs-thirdparty
           - file: 02-import-system/03-packages-modules
           - file: 02-import-system/04-circular-imports
+
+  - caption: Module 3 - Classes & Objects
+    chapters:
+      - file: 03-classes-objects/index
+        sections:
+          - file: 03-classes-objects/01-reading-classes
+          - file: 03-classes-objects/02-inheritance
+          - file: 03-classes-objects/03-dataclasses
+          - file: 03-classes-objects/04-oop-patterns
+
+  - caption: Module 4 - Functions
+    chapters:
+      - file: 04-functions/index
+        sections:
+          - file: 04-functions/01-signatures
+          - file: 04-functions/02-decorators
+          - file: 04-functions/03-closures
+          - file: 04-functions/04-type-hints
+
+  - caption: Module 5 - Control Flow
+    chapters:
+      - file: 05-control-flow/index
+        sections:
+          - file: 05-control-flow/01-conditionals
+          - file: 05-control-flow/02-loops-iteration
+          - file: 05-control-flow/03-exceptions
+          - file: 05-control-flow/04-context-managers
+
+  - caption: Module 6 - Data Structures
+    chapters:
+      - file: 06-data-structures/index
+        sections:
+          - file: 06-data-structures/01-core-collections
+          - file: 06-data-structures/02-specialized-collections
+          - file: 06-data-structures/03-strings-bytes
+          - file: 06-data-structures/04-none-optional
+
+  - caption: Module 7 - Python Magic
+    chapters:
+      - file: 07-python-magic/index
+        sections:
+          - file: 07-python-magic/01-dunder-methods
+          - file: 07-python-magic/02-iterators-generators
+          - file: 07-python-magic/03-descriptors-properties
+          - file: 07-python-magic/04-async-await
+
+  - caption: Module 8 - Debugging AI Code
+    chapters:
+      - file: 08-debugging/index
+        sections:
+          - file: 08-debugging/01-common-mistakes
+          - file: 08-debugging/02-debugging-techniques
+          - file: 08-debugging/03-reading-tracebacks
+          - file: 08-debugging/04-testing

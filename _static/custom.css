@@ -27,26 +27,39 @@ html[data-theme="dark"] code {
 /* Code syntax highlighting - dark mode (Catppuccin-inspired) */
 html[data-theme="dark"] .highlight .k,
 html[data-theme="dark"] .highlight .kn,
-html[data-theme="dark"] .highlight .kd {
+html[data-theme="dark"] .highlight .kd,
+html[data-theme="dark"] .highlight .kc,
+html[data-theme="dark"] .highlight .kr,
+html[data-theme="dark"] .highlight .kt {
     color: #cba6f7 !important;  /* Keywords - purple */
 }
 
 html[data-theme="dark"] .highlight .n,
-html[data-theme="dark"] .highlight .nn {
+html[data-theme="dark"] .highlight .nn,
+html[data-theme="dark"] .highlight .nx {
     color: #cdd6f4 !important;  /* Names - light text */
 }
 
 html[data-theme="dark"] .highlight .s,
 html[data-theme="dark"] .highlight .s1,
 html[data-theme="dark"] .highlight .s2,
-html[data-theme="dark"] .highlight .sd {
+html[data-theme="dark"] .highlight .sd,
+html[data-theme="dark"] .highlight .sb,
+html[data-theme="dark"] .highlight .sc,
+html[data-theme="dark"] .highlight .se,
+html[data-theme="dark"] .highlight .sh,
+html[data-theme="dark"] .highlight .sr,
+html[data-theme="dark"] .highlight .ss {
     color: #a6e3a1 !important;  /* Strings - green */
 }
 
 html[data-theme="dark"] .highlight .c,
 html[data-theme="dark"] .highlight .c1,
-html[data-theme="dark"] .highlight .cm {
-    color: #6c7086 !important;  /* Comments - gray */
+html[data-theme="dark"] .highlight .cm,
+html[data-theme="dark"] .highlight .cp,
+html[data-theme="dark"] .highlight .cs,
+html[data-theme="dark"] .highlight .ch {
+    color: #9399b2 !important;  /* Comments - brighter gray */
     font-style: italic;
 }
 
@@ -62,7 +75,10 @@ html[data-theme="dark"] .highlight .fm {
 
 html[data-theme="dark"] .highlight .mi,
 html[data-theme="dark"] .highlight .mf,
-html[data-theme="dark"] .highlight .mo {
+html[data-theme="dark"] .highlight .mo,
+html[data-theme="dark"] .highlight .mh,
+html[data-theme="dark"] .highlight .mb,
+html[data-theme="dark"] .highlight .il {
     color: #fab387 !important;  /* Numbers - orange */
 }
 
@@ -83,7 +99,8 @@ html[data-theme="dark"] .highlight .ne {
     color: #f38ba8 !important;  /* Exceptions - red */
 }
 
-html[data-theme="dark"] .highlight .si {
+html[data-theme="dark"] .highlight .si,
+html[data-theme="dark"] .highlight .sx {
     color: #fab387 !important;  /* String interpolation - orange */
 }
 
@@ -91,18 +108,170 @@ html[data-theme="dark"] .highlight .sa {
     color: #cba6f7 !important;  /* String prefix - purple */
 }
 
-/* Output cells in dark mode */
+html[data-theme="dark"] .highlight .na,
+html[data-theme="dark"] .highlight .nd {
+    color: #89dceb !important;  /* Decorators/Attributes - cyan */
+}
+
+html[data-theme="dark"] .highlight .ni {
+    color: #f5c2e7 !important;  /* Entity names - pink */
+}
+
+html[data-theme="dark"] .highlight .nv,
+html[data-theme="dark"] .highlight .vi,
+html[data-theme="dark"] .highlight .vg,
+html[data-theme="dark"] .highlight .vc {
+    color: #f5e0dc !important;  /* Variables - light pink */
+}
+
+/* ============================================
+   THEBE / CODEMIRROR LIVE CODE EDITOR - DARK MODE
+   ============================================ */
+
+/* Main editor area */
+html[data-theme="dark"] .thebelab-cell .CodeMirror,
+html[data-theme="dark"] .thebe-input .CodeMirror,
+html[data-theme="dark"] .CodeMirror {
+    background-color: #1e1e2e !important;
+    color: #cdd6f4 !important;
+}
+
+html[data-theme="dark"] .CodeMirror-gutters {
+    background-color: #181825 !important;
+    border-right: 1px solid #45475a !important;
+}
+
+html[data-theme="dark"] .CodeMirror-linenumber {
+    color: #6c7086 !important;
+}
+
+html[data-theme="dark"] .CodeMirror-cursor {
+    border-left: 2px solid #f5e0dc !important;
+}
+
+html[data-theme="dark"] .CodeMirror-selected {
+    background-color: #45475a !important;
+}
+
+html[data-theme="dark"] .CodeMirror-line::selection,
+html[data-theme="dark"] .CodeMirror-line > span::selection,
+html[data-theme="dark"] .CodeMirror-line > span > span::selection {
+    background-color: #45475a !important;
+}
+
+/* CodeMirror syntax highlighting - dark mode */
+html[data-theme="dark"] .cm-keyword {
+    color: #cba6f7 !important;  /* Keywords - purple */
+}
+
+html[data-theme="dark"] .cm-def {
+    color: #89b4fa !important;  /* Definitions - blue */
+}
+
+html[data-theme="dark"] .cm-variable,
+html[data-theme="dark"] .cm-variable-2,
+html[data-theme="dark"] .cm-variable-3 {
+    color: #cdd6f4 !important;  /* Variables - light text */
+}
+
+html[data-theme="dark"] .cm-string,
+html[data-theme="dark"] .cm-string-2 {
+    color: #a6e3a1 !important;  /* Strings - green */
+}
+
+html[data-theme="dark"] .cm-comment {
+    color: #9399b2 !important;  /* Comments - brighter gray */
+    font-style: italic;
+}
+
+html[data-theme="dark"] .cm-number {
+    color: #fab387 !important;  /* Numbers - orange */
+}
+
+html[data-theme="dark"] .cm-operator {
+    color: #94e2d5 !important;  /* Operators - teal */
+}
+
+html[data-theme="dark"] .cm-builtin {
+    color: #89dceb !important;  /* Builtins - cyan */
+}
+
+html[data-theme="dark"] .cm-property {
+    color: #89b4fa !important;  /* Properties - blue */
+}
+
+html[data-theme="dark"] .cm-punctuation,
+html[data-theme="dark"] .cm-bracket {
+    color: #cdd6f4 !important;  /* Punctuation - light */
+}
+
+html[data-theme="dark"] .cm-meta {
+    color: #f9e2af !important;  /* Meta - yellow */
+}
+
+html[data-theme="dark"] .cm-atom {
+    color: #fab387 !important;  /* Atoms (True, False, None) - orange */
+}
+
+html[data-theme="dark"] .cm-attribute {
+    color: #89dceb !important;  /* Attributes - cyan */
+}
+
+html[data-theme="dark"] .cm-qualifier {
+    color: #f9e2af !important;  /* Qualifiers - yellow */
+}
+
+html[data-theme="dark"] .cm-type {
+    color: #f9e2af !important;  /* Types - yellow */
+}
+
+html[data-theme="dark"] .cm-error {
+    color: #f38ba8 !important;  /* Errors - red */
+}
+
+/* ============================================
+   THEBE OUTPUT CELLS - DARK MODE
+   ============================================ */
+
+html[data-theme="dark"] .thebelab-cell .jp-OutputArea,
+html[data-theme="dark"] .thebe-output,
 html[data-theme="dark"] .cell_output {
     background-color: #181825 !important;
     border-left: 3px solid #89b4fa !important;
     padding: 10px !important;
     margin: 5px 0 !important;
     border-radius: 0 8px 8px 0 !important;
+    color: #cdd6f4 !important;
 }
 
-html[data-theme="dark"] .cell_output pre {
-    color: #a6adc8 !important;
+html[data-theme="dark"] .cell_output pre,
+html[data-theme="dark"] .thebelab-cell .jp-OutputArea pre,
+html[data-theme="dark"] .thebe-output pre {
+    color: #bac2de !important;
     background-color: transparent !important;
+}
+
+html[data-theme="dark"] .jp-OutputArea-output {
+    color: #cdd6f4 !important;
+}
+
+/* Thebe buttons */
+html[data-theme="dark"] .thebelab-button,
+html[data-theme="dark"] .thebe-button {
+    background-color: #313244 !important;
+    color: #cdd6f4 !important;
+    border: 1px solid #45475a !important;
+}
+
+html[data-theme="dark"] .thebelab-button:hover,
+html[data-theme="dark"] .thebe-button:hover {
+    background-color: #45475a !important;
+}
+
+/* Waiting for kernel message */
+html[data-theme="dark"] .thebe-status,
+html[data-theme="dark"] .thebelab-status {
+    color: #f9e2af !important;
 }
 
 /* ============================================
@@ -140,7 +309,7 @@ html[data-theme="light"] .cell_output {
    ============================================ */
 
 /* Better code font */
-code, pre, .highlight {
+code, pre, .highlight, .CodeMirror {
     font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', Consolas, monospace !important;
     font-size: 0.9em !important;
 }
@@ -166,4 +335,36 @@ button.copybtn {
 
 button.copybtn:hover {
     opacity: 1;
+}
+
+/* ============================================
+   FALLBACK: NO DATA-THEME ATTRIBUTE
+   ============================================ */
+
+/* Some themes use prefers-color-scheme instead */
+@media (prefers-color-scheme: dark) {
+    .highlight {
+        background-color: #1e1e2e !important;
+        border: 1px solid #45475a !important;
+    }
+
+    .highlight pre {
+        background-color: #1e1e2e !important;
+        color: #cdd6f4 !important;
+    }
+
+    .CodeMirror {
+        background-color: #1e1e2e !important;
+        color: #cdd6f4 !important;
+    }
+
+    .cm-keyword { color: #cba6f7 !important; }
+    .cm-def { color: #89b4fa !important; }
+    .cm-variable, .cm-variable-2 { color: #cdd6f4 !important; }
+    .cm-string, .cm-string-2 { color: #a6e3a1 !important; }
+    .cm-comment { color: #9399b2 !important; font-style: italic; }
+    .cm-number { color: #fab387 !important; }
+    .cm-operator { color: #94e2d5 !important; }
+    .cm-builtin { color: #89dceb !important; }
+    .cm-atom { color: #fab387 !important; }
 }
